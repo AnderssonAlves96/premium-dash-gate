@@ -73,9 +73,9 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6">
-        <Button onClick={handleAddClick} size="icon" className="h-12 w-12 rounded-full shadow-lg">
-          <Plus className="h-6 w-6" />
+      <div className="fixed bottom-6 right-6 z-50">
+        <Button onClick={handleAddClick} size="icon" className="h-14 w-14 rounded-full shadow-lg text-lg">
+          <Plus className="h-7 w-7" />
         </Button>
       </div>
 
