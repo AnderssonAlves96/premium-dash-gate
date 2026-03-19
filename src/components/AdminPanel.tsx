@@ -21,12 +21,7 @@ import { toast } from 'sonner';
 
 const ADMIN_PASSWORD = 'admin123';
 
-const CATEGORIES = ['Financeiro', 'Operações', 'Comercial', 'RH', 'TI', 'Geral'];
-
-const ICON_OPTIONS = [
-  'BarChart3', 'PieChart', 'TrendingUp', 'DollarSign', 'Users', 'ShoppingCart',
-  'Activity', 'Target', 'Briefcase', 'LineChart', 'Layers', 'Database',
-];
+const TYPE_OPTIONS = ['BI', 'App', 'Outro'];
 
 const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
