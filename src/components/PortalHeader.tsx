@@ -12,7 +12,7 @@ const PortalHeader = () => {
             <span className="text-primary">Prezado(a)</span>
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Seus dashboards executivos em um só lugar.
+            Todos os seus dashboards reunidos em um só ambiente.
           </p>
         </div>
       </div>
