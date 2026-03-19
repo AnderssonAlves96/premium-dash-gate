@@ -11,7 +11,7 @@ interface DashboardCardProps {
 }
 
 const DashboardCard = ({ title, link, icon, category, index }: DashboardCardProps) => {
-  const IconComponent = (icons as Record<string, React.ComponentType<{ className?: string }>>)[icon] || icons.BarChart3;
+  const IconComponent = (icons as Record<string, LucideIcon>)[icon] || BarChart3;
 
   return (
     <motion.a
