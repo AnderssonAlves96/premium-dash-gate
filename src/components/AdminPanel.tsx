@@ -29,11 +29,10 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
   const [password, setPassword] = useState('');
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
-  const [category, setCategory] = useState('Geral');
-  const [icon, setIcon] = useState('BarChart3');
+  const [tipo, setTipo] = useState('BI');
   const [saving, setSaving] = useState(false);
 
-  const handleGearClick = () => {
+  const handleAddClick = () => {
     setShowPasswordDialog(true);
     setPassword('');
   };
