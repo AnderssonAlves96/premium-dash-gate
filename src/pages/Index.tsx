@@ -37,22 +37,22 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <PortalHeader />
 
-      <main className="px-8 py-8">
+      <main className="mx-auto max-w-7xl px-8 py-10">
         {loading ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-44 animate-pulse rounded-lg border border-border bg-muted" />
+              <div key={i} className="h-52 animate-pulse rounded-xl border border-border bg-card" />
             ))}
           </div>
         ) : dashboards.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <FolderOpen className="h-16 w-16 text-muted-foreground/50" />
+            <FolderOpen className="h-16 w-16 text-muted-foreground/40" />
             <p className="mt-4 text-base text-muted-foreground">
               Nenhum dashboard cadastrado ainda.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {dashboards.map((d, i) => (
               <DashboardCard
                 key={d.id}
