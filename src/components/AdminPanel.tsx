@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Settings } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -55,8 +55,8 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
     const { error } = await supabase.from('dashboards').insert({
       title: title.trim(),
       link: link.trim(),
-      category,
-      icon,
+      category: tipo,
+      icon: 'LayoutDashboard',
     });
     setSaving(false);
     if (error) {
@@ -65,8 +65,7 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
       toast.success('Dashboard salvo com sucesso!');
       setTitle('');
       setLink('');
-      setCategory('Geral');
-      setIcon('BarChart3');
+      setTipo('BI');
       setShowAdminDialog(false);
       onSaved();
     }
@@ -74,11 +73,11 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
 
   return (
     <>
-      <footer className="fixed bottom-4 right-4">
-        <button onClick={handleGearClick} className="transition-opacity hover:opacity-60">
-          <Settings className="h-5 w-5 text-muted-foreground opacity-30" />
-        </button>
-      </footer>
+      <div className="fixed bottom-6 right-6">
+        <Button onClick={handleAddClick} size="icon" className="h-12 w-12 rounded-full shadow-lg">
+          <Plus className="h-6 w-6" />
+        </Button>
+      </div>
 
       <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
         <DialogContent className="sm:max-w-sm">
@@ -111,7 +110,7 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <div>
-              <Label>Título</Label>
+              <Label>Nome do Dashboard</Label>
               <Input
                 value={title}
                 onChange={e => setTitle(e.target.value)}
@@ -120,7 +119,7 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
               />
             </div>
             <div>
-              <Label>Link do BI</Label>
+              <Label>Link</Label>
               <Input
                 value={link}
                 onChange={e => setLink(e.target.value)}
@@ -129,27 +128,14 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
               />
             </div>
             <div>
-              <Label>Categoria</Label>
-              <Select value={category} onValueChange={setCategory}>
+              <Label>Tipo</Label>
+              <Select value={tipo} onValueChange={setTipo}>
                 <SelectTrigger className="mt-1">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {CATEGORIES.map(c => (
-                    <SelectItem key={c} value={c}>{c}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label>Ícone</Label>
-              <Select value={icon} onValueChange={setIcon}>
-                <SelectTrigger className="mt-1">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {ICON_OPTIONS.map(i => (
-                    <SelectItem key={i} value={i}>{i}</SelectItem>
+                  {TYPE_OPTIONS.map(t => (
+                    <SelectItem key={t} value={t}>{t}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>

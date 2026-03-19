@@ -1,18 +1,14 @@
 import { motion } from 'framer-motion';
-import { icons, BarChart3 } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { LayoutDashboard } from 'lucide-react';
 
 interface DashboardCardProps {
   title: string;
   link: string;
-  icon: string;
   category: string;
   index: number;
 }
 
-const DashboardCard = ({ title, link, icon, category, index }: DashboardCardProps) => {
-  const IconComponent = (icons as Record<string, LucideIcon>)[icon] || BarChart3;
-
+const DashboardCard = ({ title, link, category, index }: DashboardCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -20,7 +16,7 @@ const DashboardCard = ({ title, link, icon, category, index }: DashboardCardProp
       transition={{ duration: 0.4, delay: index * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="flex flex-col items-center gap-4 rounded-lg border border-border bg-card p-6 transition-shadow duration-200 hover:shadow-md"
     >
-      <IconComponent className="h-8 w-8 text-muted-foreground" />
+      <LayoutDashboard className="h-8 w-8 text-muted-foreground" />
       <div className="text-center">
         <h3 className="text-sm font-bold text-foreground">{title}</h3>
         <span className="mt-1 inline-block text-xs text-muted-foreground">{category}</span>
