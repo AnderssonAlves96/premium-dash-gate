@@ -1,17 +1,19 @@
-import { Briefcase } from 'lucide-react';
+import { getGreeting } from '@/lib/greeting';
+import logo from '@/assets/logo-bq.png';
 
 const PortalHeader = () => {
   return (
-    <header className="flex items-center justify-between px-8 py-6">
-      <div />
-      <div className="flex items-center gap-3">
-        <div className="glass-card flex items-center gap-2 px-4 py-2">
-          <Briefcase className="h-5 w-5 text-primary" />
-          <span className="font-display text-lg font-semibold tracking-wide text-foreground">
-            B&Q
-          </span>
-        </div>
+    <header className="flex items-center justify-between px-8 py-6 border-b border-border">
+      <div>
+        <h1 className="text-2xl font-bold text-foreground">
+          {getGreeting()},{' '}
+          <span className="text-primary">Gestor</span>
+        </h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Seus dashboards executivos em um só lugar.
+        </p>
       </div>
+      <img src={logo} alt="B&Q Energia" className="h-14 w-auto" />
     </header>
   );
 };

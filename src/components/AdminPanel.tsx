@@ -80,28 +80,27 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
 
   return (
     <>
-      <footer className="flex justify-center py-8">
-        <button onClick={handleGearClick} className="transition-opacity hover:opacity-30">
-          <Settings className="h-5 w-5 text-foreground opacity-[0.1]" />
+      <footer className="fixed bottom-4 right-4">
+        <button onClick={handleGearClick} className="transition-opacity hover:opacity-60">
+          <Settings className="h-5 w-5 text-muted-foreground opacity-30" />
         </button>
       </footer>
 
-      {/* Password Dialog */}
       <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
-        <DialogContent className="glass-card border-border sm:max-w-sm">
+        <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle className="font-display text-foreground">Acesso Admin</DialogTitle>
+            <DialogTitle>Acesso Admin</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <div>
-              <Label className="text-muted-foreground">Senha</Label>
+              <Label>Senha</Label>
               <Input
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handlePasswordSubmit()}
                 placeholder="Digite a senha..."
-                className="mt-1 border-border bg-secondary text-foreground placeholder:text-muted-foreground"
+                className="mt-1"
               />
             </div>
             <Button onClick={handlePasswordSubmit} className="w-full">
@@ -111,38 +110,37 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
         </DialogContent>
       </Dialog>
 
-      {/* Admin Form Dialog */}
       <Dialog open={showAdminDialog} onOpenChange={setShowAdminDialog}>
-        <DialogContent className="glass-card border-border sm:max-w-md">
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="font-display text-foreground">Novo Dashboard</DialogTitle>
+            <DialogTitle>Novo Dashboard</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <div>
-              <Label className="text-muted-foreground">Título</Label>
+              <Label>Título</Label>
               <Input
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 placeholder="Ex: Vendas Mensal"
-                className="mt-1 border-border bg-secondary text-foreground placeholder:text-muted-foreground"
+                className="mt-1"
               />
             </div>
             <div>
-              <Label className="text-muted-foreground">Link do BI</Label>
+              <Label>Link do BI</Label>
               <Input
                 value={link}
                 onChange={e => setLink(e.target.value)}
                 placeholder="https://app.powerbi.com/..."
-                className="mt-1 border-border bg-secondary text-foreground placeholder:text-muted-foreground"
+                className="mt-1"
               />
             </div>
             <div>
-              <Label className="text-muted-foreground">Categoria</Label>
+              <Label>Categoria</Label>
               <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger className="mt-1 border-border bg-secondary text-foreground">
+                <SelectTrigger className="mt-1">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="border-border bg-popover">
+                <SelectContent>
                   {CATEGORIES.map(c => (
                     <SelectItem key={c} value={c}>{c}</SelectItem>
                   ))}
@@ -150,12 +148,12 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
               </Select>
             </div>
             <div>
-              <Label className="text-muted-foreground">Ícone</Label>
+              <Label>Ícone</Label>
               <Select value={icon} onValueChange={setIcon}>
-                <SelectTrigger className="mt-1 border-border bg-secondary text-foreground">
+                <SelectTrigger className="mt-1">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="border-border bg-popover">
+                <SelectContent>
                   {ICON_OPTIONS.map(i => (
                     <SelectItem key={i} value={i}>{i}</SelectItem>
                   ))}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { FolderOpen } from 'lucide-react';
 import PortalHeader from '@/components/PortalHeader';
-import GreetingBanner from '@/components/GreetingBanner';
 import DashboardCard from '@/components/DashboardCard';
 import AdminPanel from '@/components/AdminPanel';
 
@@ -34,24 +34,21 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="mesh-gradient-bg min-h-screen">
+    <div className="min-h-screen bg-background">
       <PortalHeader />
-      <GreetingBanner />
 
-      <main className="px-8 py-6">
+      <main className="px-8 py-8">
         {loading ? (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="glass-card h-36 animate-pulse" />
+              <div key={i} className="h-44 animate-pulse rounded-lg border border-border bg-muted" />
             ))}
           </div>
         ) : dashboards.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <p className="text-lg text-muted-foreground">
+          <div className="flex flex-col items-center justify-center py-24 text-center">
+            <FolderOpen className="h-16 w-16 text-muted-foreground/50" />
+            <p className="mt-4 text-base text-muted-foreground">
               Nenhum dashboard cadastrado ainda.
-            </p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Use o ícone de engrenagem abaixo para adicionar.
             </p>
           </div>
         ) : (
