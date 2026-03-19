@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { icons } from 'lucide-react';
-import { ExternalLink } from 'lucide-react';
+import { icons, ExternalLink, BarChart3 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface DashboardCardProps {
   title: string;
