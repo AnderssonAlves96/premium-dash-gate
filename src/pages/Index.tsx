@@ -58,7 +58,6 @@ const Index = () => {
                 key={d.id}
                 title={d.title}
                 link={d.link}
-                icon={d.icon}
                 category={d.category}
                 index={i}
               />
