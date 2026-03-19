@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { icons, ExternalLink, BarChart3 } from 'lucide-react';
+import { icons, BarChart3 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface DashboardCardProps {
@@ -14,26 +14,26 @@ const DashboardCard = ({ title, link, icon, category, index }: DashboardCardProp
   const IconComponent = (icons as Record<string, LucideIcon>)[icon] || BarChart3;
 
   return (
-    <motion.a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 30 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="glass-card group flex flex-col gap-4 p-6 transition-all duration-300 cursor-pointer"
+      transition={{ duration: 0.4, delay: index * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="flex flex-col items-center gap-4 rounded-lg border border-border bg-card p-6 transition-shadow duration-200 hover:shadow-md"
     >
-      <div className="flex items-start justify-between">
-        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-          <IconComponent className="h-6 w-6 text-primary" />
-        </div>
-        <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+      <IconComponent className="h-8 w-8 text-muted-foreground" />
+      <div className="text-center">
+        <h3 className="text-sm font-bold text-foreground">{title}</h3>
+        <span className="mt-1 inline-block text-xs text-muted-foreground">{category}</span>
       </div>
-      <div>
-        <h3 className="text-base font-semibold text-foreground">{title}</h3>
-        <span className="mt-1 inline-block text-xs font-medium text-muted-foreground">{category}</span>
-      </div>
-    </motion.a>
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-auto rounded-md bg-primary px-5 py-2 text-xs font-medium text-primary-foreground transition-colors hover:opacity-90"
+      >
+        Visualizar
+      </a>
+    </motion.div>
   );
 };
 
