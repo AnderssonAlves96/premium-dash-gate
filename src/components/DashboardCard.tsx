@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BarChart3, Trash2, GripVertical, ExternalLink } from 'lucide-react';
+import { BarChart3, Trash2, GripVertical, ExternalLink, AppWindow, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface DashboardCardProps {
