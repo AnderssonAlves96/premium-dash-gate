@@ -21,6 +21,7 @@ export type Database = {
           icon: string
           id: string
           link: string
+          position: number
           title: string
         }
         Insert: {
@@ -29,6 +30,7 @@ export type Database = {
           icon?: string
           id?: string
           link: string
+          position?: number
           title: string
         }
         Update: {
@@ -37,6 +39,7 @@ export type Database = {
           icon?: string
           id?: string
           link?: string
+          position?: number
           title?: string
         }
         Relationships: []
