@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import {
   Dialog,
@@ -20,10 +20,16 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 const ADMIN_PASSWORD = 'admin123';
-
+const SESSION_KEY = 'admin_authenticated';
 const TYPE_OPTIONS = ['BI', 'App', 'Outro'];
 
-const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
+interface AdminPanelProps {
+  onSaved: () => void;
+  onAdminChange?: (isAdmin: boolean) => void;
+}
+
+const AdminPanel = ({ onSaved, onAdminChange }: AdminPanelProps) => {
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [showAdminDialog, setShowAdminDialog] = useState(false);
   const [password, setPassword] = useState('');
@@ -32,13 +38,27 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
   const [tipo, setTipo] = useState('BI');
   const [saving, setSaving] = useState(false);
 
+  useEffect(() => {
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+      setIsAdmin(true);
+      onAdminChange?.(true);
+    }
+  }, []);
+
   const handleAddClick = () => {
-    setShowPasswordDialog(true);
-    setPassword('');
+    if (isAdmin) {
+      setShowAdminDialog(true);
+    } else {
+      setShowPasswordDialog(true);
+      setPassword('');
+    }
   };
 
   const handlePasswordSubmit = () => {
     if (password === ADMIN_PASSWORD) {
+      sessionStorage.setItem(SESSION_KEY, 'true');
+      setIsAdmin(true);
+      onAdminChange?.(true);
       setShowPasswordDialog(false);
       setShowAdminDialog(true);
     } else {
@@ -56,7 +76,7 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
       title: title.trim(),
       link: link.trim(),
       category: tipo,
-      icon: 'LayoutDashboard',
+      icon: 'BarChart3',
     });
     setSaving(false);
     if (error) {
