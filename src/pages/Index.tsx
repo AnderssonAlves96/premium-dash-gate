@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { FolderOpen, BarChart3, AppWindow, Layers } from 'lucide-react';
+import { FolderOpen, BarChart3, Smartphone, Layers } from 'lucide-react';
 import { toast } from 'sonner';
 import PortalHeader from '@/components/PortalHeader';
 import DashboardCard from '@/components/DashboardCard';
