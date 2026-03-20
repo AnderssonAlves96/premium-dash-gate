@@ -26,6 +26,7 @@ const DashboardCard = ({
   onDragStart, onDragOver, onDragEnd,
 }: DashboardCardProps) => {
   const catClass = categoryColor[category] || 'bg-accent text-accent-foreground';
+  const IconComponent = category === 'App' ? AppWindow : category === 'Outro' ? Globe : BarChart3;
 
   return (
     <motion.div
