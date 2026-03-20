@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BarChart3, Trash2, GripVertical, ExternalLink } from 'lucide-react';
+import { BarChart3, Trash2, GripVertical, ExternalLink, AppWindow, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface DashboardCardProps {
@@ -26,6 +26,7 @@ const DashboardCard = ({
   onDragStart, onDragOver, onDragEnd,
 }: DashboardCardProps) => {
   const catClass = categoryColor[category] || 'bg-accent text-accent-foreground';
+  const IconComponent = category === 'App' ? AppWindow : category === 'Outro' ? Globe : BarChart3;
 
   return (
     <motion.div
@@ -55,7 +56,7 @@ const DashboardCard = ({
 
       {/* Icon */}
       <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent shadow-sm">
-        <BarChart3 className="h-7 w-7 text-primary" />
+        <IconComponent className="h-7 w-7 text-primary" />
       </div>
 
       {/* Title & Category */}
