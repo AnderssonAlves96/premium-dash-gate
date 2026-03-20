@@ -56,7 +56,7 @@ const DashboardCard = ({
 
       {/* Icon */}
       <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent shadow-sm">
-        <BarChart3 className="h-7 w-7 text-primary" />
+        <IconComponent className="h-7 w-7 text-primary" />
       </div>
 
       {/* Title & Category */}
