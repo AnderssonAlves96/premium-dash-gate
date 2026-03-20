@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import {
   Dialog,
@@ -20,10 +20,12 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 const ADMIN_PASSWORD = 'admin123';
+const SESSION_KEY = 'admin_authenticated';
 
 const TYPE_OPTIONS = ['BI', 'App', 'Outro'];
 
 const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [showAdminDialog, setShowAdminDialog] = useState(false);
   const [password, setPassword] = useState('');
@@ -32,13 +34,25 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
   const [tipo, setTipo] = useState('BI');
   const [saving, setSaving] = useState(false);
 
+  useEffect(() => {
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+      setIsAdmin(true);
+    }
+  }, []);
+
   const handleAddClick = () => {
-    setShowPasswordDialog(true);
-    setPassword('');
+    if (isAdmin) {
+      setShowAdminDialog(true);
+    } else {
+      setShowPasswordDialog(true);
+      setPassword('');
+    }
   };
 
   const handlePasswordSubmit = () => {
     if (password === ADMIN_PASSWORD) {
+      sessionStorage.setItem(SESSION_KEY, 'true');
+      setIsAdmin(true);
       setShowPasswordDialog(false);
       setShowAdminDialog(true);
     } else {
@@ -56,7 +70,7 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
       title: title.trim(),
       link: link.trim(),
       category: tipo,
-      icon: 'LayoutDashboard',
+      icon: 'BarChart3',
     });
     setSaving(false);
     if (error) {
@@ -71,83 +85,23 @@ const AdminPanel = ({ onSaved }: { onSaved: () => void }) => {
     }
   };
 
-  return (
-    <>
-      <div className="fixed bottom-6 right-6 z-50">
-        <Button onClick={handleAddClick} size="icon" className="h-14 w-14 rounded-full shadow-lg text-lg">
-          <Plus className="h-7 w-7" />
-        </Button>
-      </div>
+  const handleDelete = async (id: string) => {
+    const { error } = await supabase.from('dashboards').delete().eq('id', id);
+    if (error) {
+      toast.error('Erro ao excluir: ' + error.message);
+    } else {
+      toast.success('Dashboard excluído!');
+      onSaved();
+    }
+  };
 
-      <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
-        <DialogContent className="sm:max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Acesso Admin</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4 pt-2">
-            <div>
-              <Label>Senha</Label>
-              <Input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && handlePasswordSubmit()}
-                placeholder="Digite a senha..."
-                className="mt-1"
-              />
-            </div>
-            <Button onClick={handlePasswordSubmit} className="w-full">
-              Entrar
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+  return { isAdmin, handleAddClick, handleDelete, handlePasswordSubmit, handleSave, showPasswordDialog, setShowPasswordDialog, showAdminDialog, setShowAdminDialog, password, setPassword, title, setTitle, link, setLink, tipo, setTipo, saving };
+};
 
-      <Dialog open={showAdminDialog} onOpenChange={setShowAdminDialog}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Novo Dashboard</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4 pt-2">
-            <div>
-              <Label>Nome do Dashboard</Label>
-              <Input
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-                placeholder="Ex: Vendas Mensal"
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label>Link</Label>
-              <Input
-                value={link}
-                onChange={e => setLink(e.target.value)}
-                placeholder="https://app.powerbi.com/..."
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label>Tipo</Label>
-              <Select value={tipo} onValueChange={setTipo}>
-                <SelectTrigger className="mt-1">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {TYPE_OPTIONS.map(t => (
-                    <SelectItem key={t} value={t}>{t}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <Button onClick={handleSave} disabled={saving} className="w-full">
-              {saving ? 'Salvando...' : 'Salvar'}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
+export const AdminPanelUI = ({ onSaved }: { onSaved: () => void }) => {
+  const admin = AdminPanel({ onSaved });
+
+  return { ...admin };
 };
 
 export default AdminPanel;
