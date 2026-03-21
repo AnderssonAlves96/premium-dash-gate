@@ -15,24 +15,24 @@ interface DashboardCardProps {
   onDragEnd?: () => void;
 }
 
-const categoryConfig: Record<string, { badge: string; iconBg: string; iconColor: string; btnClass: string }> = {
+const categoryConfig: Record<string, { badge: string; iconBg: string; btnClass: string; accent: string }> = {
   BI: {
-    badge: 'bg-primary/10 text-primary',
+    badge: 'bg-accent text-accent-foreground',
     iconBg: 'gradient-primary',
-    iconColor: 'text-primary-foreground',
     btnClass: 'gradient-primary text-primary-foreground',
+    accent: 'group-hover:border-primary/20',
   },
   App: {
-    badge: 'bg-[hsl(152,60%,42%)]/10 text-[hsl(152,60%,35%)]',
+    badge: 'bg-success/10 text-success',
     iconBg: 'gradient-success',
-    iconColor: 'text-[hsl(0,0%,100%)]',
-    btnClass: 'gradient-success text-[hsl(0,0%,100%)]',
+    btnClass: 'gradient-success text-success-foreground',
+    accent: 'group-hover:border-success/20',
   },
   Outro: {
-    badge: 'bg-[hsl(38,92%,50%)]/10 text-[hsl(38,70%,35%)]',
-    iconBg: 'bg-[hsl(38,92%,50%)]',
-    iconColor: 'text-[hsl(0,0%,100%)]',
-    btnClass: 'bg-[hsl(38,92%,50%)] text-[hsl(0,0%,100%)]',
+    badge: 'bg-warning/10 text-warning',
+    iconBg: 'gradient-warning',
+    btnClass: 'gradient-warning text-warning-foreground',
+    accent: 'group-hover:border-warning/20',
   },
 };
 
@@ -45,14 +45,15 @@ const DashboardCard = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24, scale: 0.96 }}
+      initial={{ opacity: 0, y: 28, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.55, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
       draggable={isAdmin}
       onDragStart={() => onDragStart?.(id)}
       onDragOver={(e) => { e.preventDefault(); onDragOver?.(id); }}
       onDragEnd={() => onDragEnd?.()}
-      className={`group relative flex flex-col items-center gap-5 rounded-2xl border border-border bg-card p-7 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1.5 ${isAdmin ? 'cursor-grab active:cursor-grabbing' : ''}`}
+      className={`group relative flex flex-col items-center gap-5 rounded-2xl border border-border bg-card p-7 shadow-card transition-all duration-300 hover:shadow-card-hover ${config.accent} ${isAdmin ? 'cursor-grab active:cursor-grabbing' : ''}`}
     >
       {/* Admin controls */}
       {isAdmin && (
@@ -69,9 +70,9 @@ const DashboardCard = ({
         </div>
       )}
 
-      {/* Icon with gradient background */}
+      {/* Icon */}
       <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${config.iconBg} shadow-md`}>
-        <IconComponent className={`h-7 w-7 ${config.iconColor}`} />
+        <IconComponent className="h-7 w-7 text-primary-foreground" />
       </div>
 
       {/* Title & Category */}
