@@ -94,29 +94,32 @@ const AdminPanel = ({ onSaved, onAdminChange }: AdminPanelProps) => {
   return (
     <>
       <div className="fixed bottom-6 right-6 z-50">
-        <Button onClick={handleAddClick} size="icon" className="h-14 w-14 rounded-full shadow-lg text-lg">
+        <button
+          onClick={handleAddClick}
+          className="flex h-14 w-14 items-center justify-center rounded-2xl gradient-primary shadow-fab text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+        >
           <Plus className="h-7 w-7" />
-        </Button>
+        </button>
       </div>
 
       <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
-        <DialogContent className="sm:max-w-sm">
+        <DialogContent className="sm:max-w-sm rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Acesso Admin</DialogTitle>
+            <DialogTitle className="text-lg">Acesso Admin</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <div>
-              <Label>Senha</Label>
+              <Label className="text-sm font-medium">Senha</Label>
               <Input
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handlePasswordSubmit()}
                 placeholder="Digite a senha..."
-                className="mt-1"
+                className="mt-1.5 rounded-xl"
               />
             </div>
-            <Button onClick={handlePasswordSubmit} className="w-full">
+            <Button onClick={handlePasswordSubmit} className="w-full rounded-xl gradient-primary border-0 shadow-sm hover:shadow-md transition-all">
               Entrar
             </Button>
           </div>
@@ -124,33 +127,33 @@ const AdminPanel = ({ onSaved, onAdminChange }: AdminPanelProps) => {
       </Dialog>
 
       <Dialog open={showAdminDialog} onOpenChange={setShowAdminDialog}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Novo Dashboard</DialogTitle>
+            <DialogTitle className="text-lg">Novo Dashboard</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <div>
-              <Label>Nome do Dashboard</Label>
+              <Label className="text-sm font-medium">Nome do Dashboard</Label>
               <Input
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 placeholder="Ex: Vendas Mensal"
-                className="mt-1"
+                className="mt-1.5 rounded-xl"
               />
             </div>
             <div>
-              <Label>Link</Label>
+              <Label className="text-sm font-medium">Link</Label>
               <Input
                 value={link}
                 onChange={e => setLink(e.target.value)}
                 placeholder="https://app.powerbi.com/..."
-                className="mt-1"
+                className="mt-1.5 rounded-xl"
               />
             </div>
             <div>
-              <Label>Tipo</Label>
+              <Label className="text-sm font-medium">Tipo</Label>
               <Select value={tipo} onValueChange={setTipo}>
-                <SelectTrigger className="mt-1">
+                <SelectTrigger className="mt-1.5 rounded-xl">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -160,7 +163,7 @@ const AdminPanel = ({ onSaved, onAdminChange }: AdminPanelProps) => {
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={handleSave} disabled={saving} className="w-full">
+            <Button onClick={handleSave} disabled={saving} className="w-full rounded-xl gradient-primary border-0 shadow-sm hover:shadow-md transition-all">
               {saving ? 'Salvando...' : 'Salvar'}
             </Button>
           </div>

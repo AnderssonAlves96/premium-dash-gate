@@ -15,29 +15,44 @@ interface DashboardCardProps {
   onDragEnd?: () => void;
 }
 
-const categoryColor: Record<string, string> = {
-  BI: 'bg-primary/10 text-primary',
-  App: 'bg-green-100 text-green-700',
-  Outro: 'bg-orange-100 text-orange-700',
+const categoryConfig: Record<string, { badge: string; iconBg: string; iconColor: string; btnClass: string }> = {
+  BI: {
+    badge: 'bg-primary/10 text-primary',
+    iconBg: 'gradient-primary',
+    iconColor: 'text-primary-foreground',
+    btnClass: 'gradient-primary text-primary-foreground',
+  },
+  App: {
+    badge: 'bg-[hsl(152,60%,42%)]/10 text-[hsl(152,60%,35%)]',
+    iconBg: 'gradient-success',
+    iconColor: 'text-[hsl(0,0%,100%)]',
+    btnClass: 'gradient-success text-[hsl(0,0%,100%)]',
+  },
+  Outro: {
+    badge: 'bg-[hsl(38,92%,50%)]/10 text-[hsl(38,70%,35%)]',
+    iconBg: 'bg-[hsl(38,92%,50%)]',
+    iconColor: 'text-[hsl(0,0%,100%)]',
+    btnClass: 'bg-[hsl(38,92%,50%)] text-[hsl(0,0%,100%)]',
+  },
 };
 
 const DashboardCard = ({
   id, title, link, category, index, isAdmin, onDelete,
   onDragStart, onDragOver, onDragEnd,
 }: DashboardCardProps) => {
-  const catClass = categoryColor[category] || 'bg-accent text-accent-foreground';
+  const config = categoryConfig[category] || categoryConfig.BI;
   const IconComponent = category === 'App' ? AppWindow : category === 'Outro' ? Globe : BarChart3;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.38, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 24, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       draggable={isAdmin}
       onDragStart={() => onDragStart?.(id)}
       onDragOver={(e) => { e.preventDefault(); onDragOver?.(id); }}
       onDragEnd={() => onDragEnd?.()}
-      className={`group relative flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${isAdmin ? 'cursor-grab active:cursor-grabbing' : ''}`}
+      className={`group relative flex flex-col items-center gap-5 rounded-2xl border border-border bg-card p-7 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1.5 ${isAdmin ? 'cursor-grab active:cursor-grabbing' : ''}`}
     >
       {/* Admin controls */}
       {isAdmin && (
@@ -54,15 +69,15 @@ const DashboardCard = ({
         </div>
       )}
 
-      {/* Icon */}
-      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent shadow-sm">
-        <IconComponent className="h-7 w-7 text-primary" />
+      {/* Icon with gradient background */}
+      <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${config.iconBg} shadow-md`}>
+        <IconComponent className={`h-7 w-7 ${config.iconColor}`} />
       </div>
 
       {/* Title & Category */}
-      <div className="text-center space-y-1.5">
+      <div className="text-center space-y-2">
         <h3 className="text-sm font-bold text-foreground leading-snug">{title}</h3>
-        <span className={`inline-block rounded-full px-3 py-0.5 text-[11px] font-semibold ${catClass}`}>
+        <span className={`inline-block rounded-full px-3 py-0.5 text-[11px] font-semibold ${config.badge}`}>
           {category}
         </span>
       </div>
@@ -72,7 +87,7 @@ const DashboardCard = ({
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-auto inline-flex items-center gap-1.5 rounded-lg bg-primary px-5 py-2.5 text-xs font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:shadow-md hover:brightness-110"
+        className={`mt-auto inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-xs font-semibold shadow-sm transition-all duration-200 hover:shadow-md hover:brightness-110 ${config.btnClass}`}
       >
         Visualizar
         <ExternalLink className="h-3 w-3" />
