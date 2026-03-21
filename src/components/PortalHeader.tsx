@@ -4,21 +4,25 @@ import logo from '@/assets/logo-bq.png';
 const PortalHeader = () => {
   return (
     <header className="relative overflow-hidden border-b border-border bg-card">
-      {/* Subtle decorative accent */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'radial-gradient(circle at 80% 50%, hsl(217 91% 50%), transparent 50%), radial-gradient(circle at 20% 80%, hsl(152 60% 42%), transparent 40%)'
+      {/* Mesh gradient background */}
+      <div className="absolute inset-0 gradient-header" />
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-[0.04]" style={{
+        background: 'radial-gradient(circle, hsl(231 65% 55%), transparent 60%)'
       }} />
-      
-      <div className="relative flex items-center gap-5 px-8 py-6">
+      <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full opacity-[0.03]" style={{
+        background: 'radial-gradient(circle, hsl(160 55% 40%), transparent 60%)'
+      }} />
+
+      <div className="relative flex items-center gap-5 px-8 py-7">
         <img src={logo} alt="B&Q Energia" className="h-12 w-auto rounded-xl shadow-sm" />
         <div>
           <h1 className="text-xl font-bold text-foreground tracking-tight">
             {getGreeting()},{' '}
-            <span className="bg-gradient-to-r from-primary to-[hsl(217,91%,65%)] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
               Prezado(a)
             </span>
           </h1>
-          <p className="mt-0.5 text-sm text-muted-foreground">
+          <p className="mt-1 text-sm text-muted-foreground">
             Visão consolidada dos principais indicadores B&Q Bahia.
           </p>
         </div>

@@ -96,14 +96,14 @@ const AdminPanel = ({ onSaved, onAdminChange }: AdminPanelProps) => {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={handleAddClick}
-          className="flex h-14 w-14 items-center justify-center rounded-2xl gradient-primary shadow-fab text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+          className="flex h-14 w-14 items-center justify-center rounded-2xl gradient-primary shadow-fab text-primary-foreground transition-all duration-300 hover:scale-110 active:scale-95"
         >
           <Plus className="h-7 w-7" />
         </button>
       </div>
 
       <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
-        <DialogContent className="sm:max-w-sm rounded-2xl">
+        <DialogContent className="sm:max-w-sm rounded-2xl border-border">
           <DialogHeader>
             <DialogTitle className="text-lg">Acesso Admin</DialogTitle>
           </DialogHeader>
@@ -127,7 +127,7 @@ const AdminPanel = ({ onSaved, onAdminChange }: AdminPanelProps) => {
       </Dialog>
 
       <Dialog open={showAdminDialog} onOpenChange={setShowAdminDialog}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
+        <DialogContent className="sm:max-w-md rounded-2xl border-border">
           <DialogHeader>
             <DialogTitle className="text-lg">Novo Dashboard</DialogTitle>
           </DialogHeader>
