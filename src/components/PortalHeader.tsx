@@ -26,8 +26,7 @@ const PortalHeader = () => {
           transition={{ duration: 0.5 }}
           className="relative"
         >
-          <div className="absolute -inset-1 rounded-2xl gradient-primary opacity-20 blur-md" />
-          <img src={logo} alt="B&Q Energia" className="relative h-14 w-auto rounded-2xl shadow-md" />
+          <img src={logo} alt="B&Q Energia" className="h-14 w-auto rounded-2xl" />
         </motion.div>
 
         {/* Text block */}
