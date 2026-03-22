@@ -70,7 +70,7 @@
 
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(231 65% 55%), hsl(250 70% 65%));
+    background: linear-gradient(135deg, hsl(231 65% 55%), hsl(215 80% 55%));
   }
   .gradient-success {
     background: linear-gradient(135deg, hsl(160 55% 40%), hsl(160 55% 52%));
