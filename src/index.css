@@ -15,7 +15,7 @@
 
     --primary: 231 65% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 250 70% 65%;
+    --primary-glow: 215 80% 55%;
 
     --secondary: 225 20% 95%;
     --secondary-foreground: 222 30% 20%;
@@ -70,7 +70,7 @@
 
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(231 65% 55%), hsl(250 70% 65%));
+    background: linear-gradient(135deg, hsl(231 65% 55%), hsl(215 80% 55%));
   }
   .gradient-success {
     background: linear-gradient(135deg, hsl(160 55% 40%), hsl(160 55% 52%));
@@ -82,7 +82,7 @@
     background: linear-gradient(135deg, hsl(12 80% 60%), hsl(25 90% 65%));
   }
   .gradient-header {
-    background: linear-gradient(135deg, hsl(231 65% 55% / 0.04), hsl(250 70% 65% / 0.06), hsl(160 55% 40% / 0.03));
+    background: linear-gradient(135deg, hsl(231 65% 55% / 0.04), hsl(215 80% 55% / 0.06), hsl(160 55% 40% / 0.03));
   }
   .shadow-card {
     box-shadow:
